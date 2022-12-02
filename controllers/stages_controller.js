@@ -1,10 +1,10 @@
-// DEPENDENCIES
+// Dependencies
 const stages = require('express').Router()
 const db = require('../models')
 const { Stage, Event } = db 
 const { Op } = require('sequelize')
 
-// FIND ALL STAGES
+// Find all Stages
 stages.get('/', async (req, res) => {
     try {
         const foundStages = await Stage.findAll({
@@ -18,7 +18,7 @@ stages.get('/', async (req, res) => {
     }
 })
 
-// FIND A SPECIFIC STAGE
+// Find specific Stage
 stages.get('/:name', async (req, res) => {
     try {
         const foundStage = await Stage.findOne({
@@ -38,12 +38,12 @@ stages.get('/:name', async (req, res) => {
     }
 })
 
-// CREATE A STAGE
+// New Stage
 stages.post('/', async (req, res) => {
     try {
         const newStage = await Stage.create(req.body)
         res.status(200).json({
-            message: 'Successfully inserted a new stage',
+            message: 'Successfully created a new stage',
             data: newStage
         })
     } catch(err) {
@@ -51,7 +51,7 @@ stages.post('/', async (req, res) => {
     }
 })
 
-// UPDATE A STAGE
+// Update Stage
 stages.put('/:id', async (req, res) => {
     try {
         const updatedStages = await Stage.update(req.body, {
@@ -67,7 +67,7 @@ stages.put('/:id', async (req, res) => {
     }
 })
 
-// DELETE A STAGE
+// Delete Stage
 stages.delete('/:id', async (req, res) => {
     try {
         const deletedStages = await Stage.destroy({
@@ -83,5 +83,4 @@ stages.delete('/:id', async (req, res) => {
     }
 })
 
-// EXPORT
 module.exports = stages

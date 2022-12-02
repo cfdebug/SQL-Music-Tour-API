@@ -1,10 +1,10 @@
-// DEPENDENCIES
+// Dependencies
 const bands = require('express').Router()
 const db = require('../models')
 const { Band, MeetGreet, SetTime, Event } = db 
 const { Op } = require('sequelize')
 
-// FIND ALL BANDS
+// Find all Bands
 bands.get('/', async (req, res) => {
     try {
         const foundBands = await Band.findAll({
@@ -19,7 +19,7 @@ bands.get('/', async (req, res) => {
     }
 })
 
-// FIND A SPECIFIC BAND
+// Find specific Band
 bands.get('/:name', async (req, res) => {
     try {
         const foundBand = await Band.findOne({
@@ -57,12 +57,12 @@ bands.get('/:name', async (req, res) => {
     }
 })
 
-// CREATE A BAND
+// New Band
 bands.post('/', async (req, res) => {
     try {
         const newBand = await Band.create(req.body)
         res.status(200).json({
-            message: 'Successfully inserted a new band',
+            message: 'Successfully created a new band',
             data: newBand
         })
     } catch(err) {
@@ -70,7 +70,7 @@ bands.post('/', async (req, res) => {
     }
 })
 
-// UPDATE A BAND
+// Update Band
 bands.put('/:id', async (req, res) => {
     try {
         const updatedBands = await Band.update(req.body, {
@@ -86,7 +86,7 @@ bands.put('/:id', async (req, res) => {
     }
 })
 
-// DELETE A BAND
+// Delete Band
 bands.delete('/:id', async (req, res) => {
     try {
         const deletedBands = await Band.destroy({
@@ -102,5 +102,4 @@ bands.delete('/:id', async (req, res) => {
     }
 })
 
-// EXPORT
 module.exports = bands
